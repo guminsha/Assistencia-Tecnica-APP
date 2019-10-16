@@ -7,7 +7,7 @@ export interface AppProps {
 export interface AppState {
 }
 
-export default class QuadradoLendas extends React.Component<AppProps, AppState> {
+export default class Quadrado extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
         super(props);
         this.state = {
@@ -25,7 +25,7 @@ export default class QuadradoLendas extends React.Component<AppProps, AppState> 
 
 const styles = StyleSheet.create({
     quadrado: {
-        backgroundColor: 'rgba(0,0,0, 0.5)',
+        backgroundColor: 'rgba(0,0,0, 0.7)',
         width: '100%',
         padding: 10,
         borderRadius: 10,

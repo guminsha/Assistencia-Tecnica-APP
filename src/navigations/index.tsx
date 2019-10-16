@@ -1,6 +1,6 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import HomeScreen from '../screens/home';
 import LoginScreen from '../screens/login';
+import drawerMenu from './drawer-menu';
 
 const navigation = createStackNavigator({
 	login: {
@@ -8,10 +8,10 @@ const navigation = createStackNavigator({
 	  navigationOptions: { title: 'Login', header:null }
 	},
 	home: {
-	  screen: HomeScreen,
-	  navigationOptions: { title: 'Home' }
+	  screen: drawerMenu,
+	  navigationOptions: { title: 'Home', header:null }
 	}
-  }, { initialRouteName: 'login' });
+  }, { initialRouteName: 'home' });
   
  
 

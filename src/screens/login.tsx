@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, ImageBackground, KeyboardAvoidingView, Image, Alert } from 'react-native';
+import { View, StyleSheet, Text, ImageBackground, KeyboardAvoidingView, Image, Alert, ToastAndroid } from 'react-native';
 import { Button } from 'react-native-elements';
 import InputRound from '../components/input-round';
 import Quadrado from '../components/quadrado';
@@ -27,13 +27,16 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
     if (this.state.login == 'admin' && this.state.senha == 'admin123') {
       this.props.navigation.navigate('home', {login: this.state.login});
     }
+    else if(this.state.login == '' || this.state.senha == ''){
+      ToastAndroid.showWithGravity('Existem campos vazios', 2000, ToastAndroid.BOTTOM)
+    }
     else{
       Alert.alert('Erro', 'Email ou senha incorreta');
     }
   }
 
   public render() {
-    return (<ImageBackground source={require('./../../assets/imgs/background.jpg')}
+    return (<ImageBackground source={require('./../../assets/imgs/background2.jpg')}
       style={styles.background}>
 
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
