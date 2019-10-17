@@ -66,7 +66,7 @@ const AppDrawerNavigator = createDrawerNavigator({
     pendencia: {
         screen: RegistrarPendenciaScreen,
         navigationOptions: {
-            title: 'Registrar Pendência',
+            title: 'Registrar Pendências',
             drawerIcon: <Icon name="note-add" />
         }
     },

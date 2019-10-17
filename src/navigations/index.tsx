@@ -11,7 +11,7 @@ const navigation = createStackNavigator({
 	  screen: drawerMenu,
 	  navigationOptions: { title: 'Home', header:null }
 	}
-  }, { initialRouteName: 'home' });
+  }, { initialRouteName: 'login' });
   
  
 

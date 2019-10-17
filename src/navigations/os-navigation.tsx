@@ -23,5 +23,5 @@ export default createBottomTabNavigator({
                 <Icon name="add" color={tintColor} size={24} />
             ),
         }
-    }
+    },
 })
