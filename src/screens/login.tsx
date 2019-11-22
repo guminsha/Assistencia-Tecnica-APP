@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, ImageBackground, KeyboardAvoidingView, Image, Alert, ToastAndroid } from 'react-native';
+import { View, StyleSheet, Text, ImageBackground, KeyboardAvoidingView, Image, Alert, ToastAndroid, Platform } from 'react-native';
 import { Button } from 'react-native-elements';
 import InputRound from '../components/input-round';
 import Quadrado from '../components/quadrado';
+import firebase from 'firebase';
 
 export interface AppProps {
   navigation: any;
 }
 
 export interface AppState {
-  login: string;
+  email: string;
   senha: string;
 }
 
@@ -17,22 +18,23 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      login: '',
+      email: '',
       senha: '',
     };
   }
 
 
   public logar() {
-    if (this.state.login == 'admin' && this.state.senha == 'admin123') {
-      this.props.navigation.navigate('home', {login: this.state.login});
-    }
-    else if(this.state.login == '' || this.state.senha == ''){
-      ToastAndroid.showWithGravity('Existem campos vazios', 2000, ToastAndroid.BOTTOM)
-    }
-    else{
-      Alert.alert('Erro', 'Email ou senha incorreta');
-    }
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha).then(() => {
+      //Logou com sucesso
+      this.props.navigation.navigate('home', {email: this.state.email});
+    }).catch(erro => {
+      //Falha ao logar
+      if (Platform.OS == 'android')
+        ToastAndroid.show('Email ou senha incorreta', 3000)
+      else
+        Alert.alert('Erro', 'Email ou senha incorreta');
+    })
   }
 
   public render() {
@@ -45,10 +47,13 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
           <Text style={styles.logo}>Assistência Técnica</Text>
         </View>
         <Quadrado>
-          <InputRound placeholder="Digite seu login" icone="person" onChangeText={(login) => this.setState({ login })} />
+          <InputRound placeholder="Digite seu email" icone="person" onChangeText={(email) => this.setState({ email })} />
           <InputRound placeholder="Digite sua senha" icone="lock" onChangeText={(senha) => this.setState({ senha })} isPassword={true} />
           <View style={{ alignItems: 'flex-end' }}>
             <Button title="Entrar" onPress={() => this.logar()} icon={{ name: 'send', color: 'white' }} type={'outline'} buttonStyle={{ borderRadius: 20, width: 150, marginTop: 15, marginBottom: 10 }} />
+          </View>
+          <View style={{ alignItems: 'flex-end' }}>
+            <Button title="Login With Facebook" onPress={() => this.logar()} icon={{ name: 'send', color: 'white' }} type={'outline'} buttonStyle={{ borderRadius: 20, width: 150, marginTop: 15, marginBottom: 10 }} />
           </View>
         </Quadrado>
       </KeyboardAvoidingView>

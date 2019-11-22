@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, ImageBackground, Image } from 'react-native';
 import Quadrado from '../components/quadrado';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Toolbar } from '../components/toolbar';
+import firebase from 'firebase';
 
 export interface AppProps {
   navigation: any;
@@ -26,7 +27,7 @@ export default class HomeScreen extends React.Component<AppProps, AppState> {
           <View style={{  alignItems: 'center', marginTop: 30 }}>
             <Image source={require('./../../assets/imgs/logo.png')} style={styles.logoImg}></Image>
             <Text style={styles.logo}>Assistência Técnica</Text>
-            <Text style={styles.bemvindo}>Bem-vindo, {this.props.navigation.getParam('login')}!</Text>
+            <Text style={styles.bemvindo}>Bem-vindo {firebase.auth().currentUser.displayName}!</Text>
           </View>
           <Quadrado>
             <Text style={styles.titulo}>Pendências</Text>
