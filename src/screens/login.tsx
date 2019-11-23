@@ -23,11 +23,10 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
     };
   }
 
-
   public logar() {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha).then(() => {
       //Logou com sucesso
-      this.props.navigation.navigate('home', {email: this.state.email});
+      this.props.navigation.navigate('home', { email: this.state.email });
     }).catch(erro => {
       //Falha ao logar
       if (Platform.OS == 'android')
@@ -51,9 +50,6 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
           <InputRound placeholder="Digite sua senha" icone="lock" onChangeText={(senha) => this.setState({ senha })} isPassword={true} />
           <View style={{ alignItems: 'flex-end' }}>
             <Button title="Entrar" onPress={() => this.logar()} icon={{ name: 'send', color: 'white' }} type={'outline'} buttonStyle={{ borderRadius: 20, width: 150, marginTop: 15, marginBottom: 10 }} />
-          </View>
-          <View style={{ alignItems: 'flex-end' }}>
-            <Button title="Login With Facebook" onPress={() => this.logar()} icon={{ name: 'send', color: 'white' }} type={'outline'} buttonStyle={{ borderRadius: 20, width: 150, marginTop: 15, marginBottom: 10 }} />
           </View>
         </Quadrado>
       </KeyboardAvoidingView>

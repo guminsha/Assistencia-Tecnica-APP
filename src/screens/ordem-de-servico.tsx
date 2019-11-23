@@ -1,44 +1,75 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, ImageBackground, Image } from 'react-native';
+import { View, StyleSheet, Text, ImageBackground, Image, Alert } from 'react-native';
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import { Toolbar } from '../components/toolbar';
 import { ItemOS } from '../components/item-OS';
-import OrdemServico from '../models/OS-model';
+import Ordem from '../models/OS-model';
+import { Notifications } from 'expo';
+import { OrdensProvider } from '../providers/ordem';
+import * as Permissions from 'expo-permissions';
+import firebase from 'firebase';
 
 export interface AppProps {
   navigation: any;
+  ordens: Ordem[];
+  onExcluir(id: string);
 }
 
 export interface AppState {
-  ordensServico: OrdemServico[]
+  ordens: Ordem[]
 }
 
 export default class ListarOSScreen extends React.Component<AppProps, AppState> {
+
+  private ordensProvider = new OrdensProvider();
+
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      ordensServico: [new OrdemServico('852', 'Ivor Waters', 'Pendente', '1'),
-      new OrdemServico('321', 'Darby Bryan', 'Pendente', '2'),
-      new OrdemServico('655', 'Joãozinho Stephens', 'Pendente', '3'),
-      new OrdemServico('666', 'Monroe Hightower', 'Urgente', '4'),
-      new OrdemServico('963', 'Ismael Paige', 'Urgente', '5'),
-      new OrdemServico('852', 'Damon Lovel', 'Concluído', '6'),
-      new OrdemServico('741', 'Milo Kingston', 'Concluído', '7'),
-      new OrdemServico('854', 'Adelmar Alan', 'Concluído', '8'),
-      new OrdemServico('956', 'Judd Peters', 'Pendente', '9'),
-      new OrdemServico('874', 'Bert Rhodes', 'Pendente', '10'),
-      new OrdemServico('125', 'Issac Statham', 'Pendente', '11'),
-      new OrdemServico('354', 'Diogo Miles', 'Concluído', '12'),
-      new OrdemServico('485', 'Edwin Frank', 'Urgente', '13'),
-      new OrdemServico('327', 'Ian Kimball', 'Pendente', '14'),
-      new OrdemServico('861', 'Parker Judd', 'Concluído', '15'),
-      new OrdemServico('174', 'Cyrus Lyon', 'Pendente', '16'),
-      new OrdemServico('689', 'Russell Snyder', 'Pendente', '17'),
-      new OrdemServico('692', 'Jared Scrivens', 'Urgente', '18'),
-      new OrdemServico('729' ,'Branden Abraham', 'Pendente', '19'),
-      new OrdemServico('457' ,'Aric Rennoll', 'Concluído', '20'),
-      ]
+      ordens: this.props.ordens
     };
+    console.disableYellowBox = true;
+  }
+  
+  /** Função chamada assim que a página é criadda pela primeira vez */
+  async componentDidMount() {
+    //salva o token para notificação de um WebService com o EXPO
+    let permissao = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    if (permissao.status == 'granted') {
+      let token = await Notifications.getExpoPushTokenAsync()
+      console.log(token);
+
+      firebase.firestore()
+          .collection('funcionarios')
+          .doc(firebase.auth().currentUser.uid)
+          .set({'devideID': token })
+    }
+
+    //Listener que é chamado sempre que a página sendo exibida
+    this.props.navigation.addListener('didFocus', () => {
+      this.ordensProvider.buscarTodos().then(ordens => {
+        this.setState({ordens})
+      })
+      
+    })
+  }
+
+  /**
+   * Função que Exclui um item da lista
+   * @param id 
+   */
+  public excluir(id) {
+    Alert.alert('Excluir OS', 'Deseja realmente excluir essa OS?', [
+      {text:'Sim', onPress:() => {
+        
+        this.ordensProvider.excluir(id);
+        this.ordensProvider.buscarTodos().then(ordens => {
+          this.setState({ordens})
+        })
+      
+      }},
+      {text: 'Não'}
+    ]);
   }
 
   public render() {
@@ -46,14 +77,14 @@ export default class ListarOSScreen extends React.Component<AppProps, AppState> 
       <Toolbar titulo="Ordens de Serviço" navigation={this.props.navigation} menu />
       <View style={styles.container}>
         <View style={styles.legenda}>
-        <Text style={styles.legendaTexto}>Nº OS</Text>
-        <Text style={styles.legendaTexto}>Cliente</Text>
-        <Text style={styles.legendaTexto}>Status</Text>
+          <Text style={styles.legendaTexto}>Nº OS</Text>
+          <Text style={styles.legendaTexto}>Cliente</Text>
+          <Text style={styles.legendaTexto}>Status</Text>
         </View>
         <ScrollView>
           <FlatList
-            data={this.state.ordensServico}
-            extraData={this.state.ordensServico}
+            data={this.state.ordens}
+            extraData={this.state.ordens}
             keyExtractor={(t) => t.id}
             renderItem={({ item }) => (<ItemOS ordensServico={item}
               onEditar={(OrdemServico) => this.props.navigation.navigate('osEdicao', { OrdemServico })}

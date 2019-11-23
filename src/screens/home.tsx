@@ -27,15 +27,7 @@ export default class HomeScreen extends React.Component<AppProps, AppState> {
           <View style={{  alignItems: 'center', marginTop: 30 }}>
             <Image source={require('./../../assets/imgs/logo.png')} style={styles.logoImg}></Image>
             <Text style={styles.logo}>Assistência Técnica</Text>
-            <Text style={styles.bemvindo}>Bem-vindo {firebase.auth().currentUser.displayName}!</Text>
           </View>
-          <Quadrado>
-            <Text style={styles.titulo}>Pendências</Text>
-            <Text style={styles.textoPendencias}>{'\u2022'} OS Nº111 - Comprar fonte Corsair 650W.</Text>
-            <Text style={styles.textoPendencias}>{'\u2022'} OS Nº321 - Testar componentes atuais com um novo SSD.</Text>
-            <Text style={styles.textoPendencias}>{'\u2022'} OS Nº523 - Substituir HD instalado por outro.</Text>
-            <Text style={styles.textoPendencias}>{'\u2022'} OS Nº789 - Limpar novamente o cooler da CPU.</Text>
-          </Quadrado>
         </View>
       </ScrollView>
     </ImageBackground>);

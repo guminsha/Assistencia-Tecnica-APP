@@ -1,0 +1,2 @@
+export const USUARIO_LOGIN = 'USUARIO_LOGIN';
+export const USUARIO_LOGOUT = 'USUARIO_LOGOUT';

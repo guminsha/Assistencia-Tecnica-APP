@@ -11,24 +11,20 @@ export interface AppProps {
 }
 
 export interface AppState {
-  nome: string;
-  cpf: string;
-  telefone: string;
-  endereco: string;
-  cadastro: { email: string, senha: string };
+  cadastro: { email: string, senha: string, nome: string, cpf: string, telefone: string, endereco: string, };
 }
 
 export default class CadastrarFuncionarioScreen extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      nome: '',
-      cpf: '',
-      telefone: '',
-      endereco: '',
       cadastro: {
         email: '',
-        senha: ''
+        senha: '',
+        nome: '',
+        cpf: '',
+        telefone: '',
+        endereco: '',
       }
     };
   }
@@ -49,10 +45,10 @@ export default class CadastrarFuncionarioScreen extends React.Component<AppProps
       <Toolbar titulo="Funcionários" navigation={this.props.navigation} menu />
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <QuadradoCad>
-          <InputCad placeholder="Nome" onChangeText={(nome) => this.setState({ nome })} />
-          <InputCad placeholder="CPF" onChangeText={(cpf) => this.setState({ cpf })} />
-          <InputCad placeholder="Telefone" onChangeText={(telefone) => this.setState({ telefone })} />
-          <InputCad placeholder="Endereço" onChangeText={(endereco) => this.setState({ endereco })} />
+          <InputCad placeholder="Nome" onChangeText={(nome) => this.setState({ cadastro: { ...this.state.cadastro, nome } })} />
+          <InputCad placeholder="CPF" onChangeText={(cpf) => this.setState({ cadastro: { ...this.state.cadastro, cpf } })} />
+          <InputCad placeholder="Telefone" onChangeText={(telefone) => this.setState({ cadastro: { ...this.state.cadastro, telefone } })} />
+          <InputCad placeholder="Endereço" onChangeText={(endereco) => this.setState({ cadastro: { ...this.state.cadastro, endereco } })} />
           <InputCad placeholder="E-mail" onChangeText={(email) => this.setState({ cadastro: { ...this.state.cadastro, email } })} />
           <InputCad placeholder="Senha" onChangeText={(senha) => this.setState({ cadastro: { ...this.state.cadastro, senha } })} isPassword />
           <View style={{ alignItems: 'flex-end' }}>
