@@ -4,8 +4,8 @@ import Funcionario from '../models/funcionario-model';
 import Swipeout from 'react-native-swipeout';
 
 export interface AppProps {
-    funcionario: Funcionario;
-    onEditar(Funcionarios: Funcionario);
+    funcionario:Funcionario;
+    onEditar(funcionario:Funcionario);
     onExcluir(id: string);
 }
 

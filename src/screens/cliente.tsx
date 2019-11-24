@@ -34,15 +34,15 @@ export default class ListarClienteScreen extends React.Component<AppProps, AppSt
     //Listener para listar as clientes
     this.props.navigation.addListener('didFocus', () => {
       this.clientesProvider.buscarTodos().then(clientes => {
-        this.setState({clientes})
+        this.setState({ clientes })
       })
     })
   }
 
   /**
- * Função que Exclui um item da lista
- * @param id 
- */
+   * Função que Exclui um item da lista
+   * @param id 
+   */
   public excluir(id) {
     Alert.alert('Excluir Cliente', 'Deseja realmente excluir esse Cliente?', [
       {
@@ -73,13 +73,13 @@ export default class ListarClienteScreen extends React.Component<AppProps, AppSt
             extraData={this.state.clientes}
             keyExtractor={(t) => t.id}
             renderItem={({ item }) => (<ItemCliente cliente={item}
-              onEditar={(Cliente) => this.props.navigation.navigate('clienteEdit', { Cliente })}
+              onEditar={(cliente) => this.props.navigation.navigate('clienteEdit', { cliente })}
               onExcluir={this.excluir.bind(this)} />
             )}
           />
         </ScrollView>
       </View>
-      <Fab onPress={() => this.props.navigation.navigate('clienteCad')}/> 
+      <Fab onPress={() => this.props.navigation.navigate('clienteCad')} />
     </ImageBackground>);
   }
 }

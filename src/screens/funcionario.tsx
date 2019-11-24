@@ -34,7 +34,7 @@ export default class ListarFuncionarioScreen extends React.Component<AppProps, A
     //Listener para listar as funcionarios
     this.props.navigation.addListener('didFocus', () => {
       this.funcionariosProvider.buscarTodos().then(funcionarios => {
-        this.setState({ funcionarios })
+        this.setState({funcionarios})
       })
     })
   }
@@ -45,7 +45,8 @@ export default class ListarFuncionarioScreen extends React.Component<AppProps, A
    */
   public excluir(id) {
     Alert.alert('Excluir OS', 'Deseja realmente excluir essa OS?', [
-      {text:'Sim', onPress:() => {
+      {
+        text:'Sim', onPress:() => {
         
         this.funcionariosProvider.excluir(id);
         this.funcionariosProvider.buscarTodos().then(funcionarios => {
@@ -71,7 +72,7 @@ export default class ListarFuncionarioScreen extends React.Component<AppProps, A
             extraData={this.state.funcionarios}
             keyExtractor={(t) => t.id}
             renderItem={({ item }) => (<ItemFuncionario funcionario={item}
-              onEditar={(Funcionario) => this.props.navigation.navigate('funcEdit', { Funcionario })}
+              onEditar={(funcionario) => this.props.navigation.navigate('funcEdit', { funcionario })}
               onExcluir={this.excluir.bind(this)} />
             )}
           />
