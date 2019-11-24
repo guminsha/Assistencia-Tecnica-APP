@@ -4,9 +4,8 @@ import { Button } from 'react-native-elements';
 import InputCad from '../components/input-cad';
 import QuadradoCad from '../components/quadrado-cad';
 import { Toolbar } from '../components/toolbar';
-import * as Permissions from 'expo-permissions';
 import Ordem from '../models/OS-model';
-import { OrdensProvider } from '../providers/ordem';
+import { OrdensProvider } from '../providers/ordem-provider';
 
 export interface AppProps {
   navigation: any;
@@ -17,7 +16,7 @@ export interface AppState {
   ordem:Ordem;
 }
 
-export default class OSCadastroScreen extends React.Component<AppProps, AppState> {
+export default class CadastrarOSScreen extends React.Component<AppProps, AppState> {
   
   private ordensProvider = new OrdensProvider();
   
@@ -37,7 +36,7 @@ export default class OSCadastroScreen extends React.Component<AppProps, AppState
   public render() {
     return (<ImageBackground source={require('./../../assets/imgs/background3.jpg')}
       style={styles.background}>
-      <Toolbar titulo="Ordens de Serviço" navigation={this.props.navigation} menu />
+      <Toolbar titulo="Nova OS" navigation={this.props.navigation} menu />
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <QuadradoCad>
           <InputCad placeholder="Nº OS" onChangeText={(numero) => this.setState({ ordem: {...this.state.ordem, numero} })} />

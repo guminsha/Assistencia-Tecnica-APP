@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, ImageBackground, Image } from 'react-native';
+import { View, StyleSheet, Text, ImageBackground, Alert } from 'react-native';
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import { Toolbar } from '../components/toolbar';
 import { ItemCliente } from '../components/item-cliente';
 import Cliente from '../models/cliente-model';
+import { ClientesProvider } from '../providers/cliente-provider';
+import { Fab } from '../components/fab';
 
 export interface AppProps {
   navigation: any;
+  clientes: Cliente[];
+  onExcluir(id: string);
 }
 
 export interface AppState {
@@ -14,31 +18,45 @@ export interface AppState {
 }
 
 export default class ListarClienteScreen extends React.Component<AppProps, AppState> {
+
+  private clientesProvider = new ClientesProvider();
+
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      clientes: [new Cliente('Ivor Waters', '82 9 9999-9999', '1'),
-      new Cliente('Darby Bryan', '82 9 4132-4334', '2'),
-      new Cliente('Joãozinho Stephens', '82 9 4132-4334', '3'),
-      new Cliente('Monroe Hightower', '81 9 9932-9323', '4'),
-      new Cliente('Ismael Paige', '81 9 9932-9323', '5'),
-      new Cliente('Damon Lovel', '81 9 8888-8888', '6'),
-      new Cliente('Milo Kingston', '81 9 8888-8888', '7'),
-      new Cliente('Adelmar Alan', '81 9 8888-8888', '8'),
-      new Cliente('Judd Peters', '82 9 4132-4334', '9'),
-      new Cliente('Bert Rhodes', '82 9 4132-4334', '10'),
-      new Cliente('Issac Statham', '82 9 4132-4334', '11'),
-      new Cliente('Diogo Miles', '81 9 8888-8888', '12'),
-      new Cliente('Edwin Frank', '81 9 9932-9323', '13'),
-      new Cliente('Ian Kimball', '82 9 4132-4334', '14'),
-      new Cliente('Parker Judd', '81 9 9688-1258', '15'),
-      new Cliente('Cyrus Lyon', '82 9 4132-4334', '16'),
-      new Cliente('Russell Snyder', '82 9 4132-4334', '17'),
-      new Cliente('Jared Scrivens', '81 9 9932-9323', '18'),
-      new Cliente('Branden Abraham', '82 94132-4334', '19'),
-      new Cliente('Aric Rennoll', '81 9 8888-8888', '20'),
-    ]
+      clientes: this.props.clientes
     };
+    console.disableYellowBox = true;
+  }
+
+  /** Função chamada assim que a página é criadda pela primeira vez */
+  async componentDidMount() {
+    //Listener para listar as clientes
+    this.props.navigation.addListener('didFocus', () => {
+      this.clientesProvider.buscarTodos().then(clientes => {
+        this.setState({clientes})
+      })
+    })
+  }
+
+  /**
+ * Função que Exclui um item da lista
+ * @param id 
+ */
+  public excluir(id) {
+    Alert.alert('Excluir Cliente', 'Deseja realmente excluir esse Cliente?', [
+      {
+        text: 'Sim', onPress: () => {
+
+          this.clientesProvider.excluir(id);
+          this.clientesProvider.buscarTodos().then(clientes => {
+            this.setState({ clientes })
+          })
+
+        }
+      },
+      { text: 'Não' }
+    ]);
   }
 
   public render() {
@@ -46,21 +64,22 @@ export default class ListarClienteScreen extends React.Component<AppProps, AppSt
       <Toolbar titulo="Clientes" navigation={this.props.navigation} menu />
       <View style={styles.container}>
         <View style={styles.legenda}>
-        <Text style={styles.legendaTexto}>Cliente</Text>
-        <Text style={styles.legendaTexto}>Telefone</Text>
+          <Text style={styles.legendaTexto}>Cliente</Text>
+          <Text style={styles.legendaTexto}>Telefone</Text>
         </View>
         <ScrollView>
           <FlatList
             data={this.state.clientes}
             extraData={this.state.clientes}
             keyExtractor={(t) => t.id}
-            renderItem={({ item }) => (<ItemCliente clientes={item}
-              onEditar={(Cliente) => this.props.navigation.navigate('clienteEdicao', { Cliente })}
-              onExcluir={(id) => console.log(id)} />
+            renderItem={({ item }) => (<ItemCliente cliente={item}
+              onEditar={(Cliente) => this.props.navigation.navigate('clienteEdit', { Cliente })}
+              onExcluir={this.excluir.bind(this)} />
             )}
           />
         </ScrollView>
       </View>
+      <Fab onPress={() => this.props.navigation.navigate('clienteCad')}/> 
     </ImageBackground>);
   }
 }

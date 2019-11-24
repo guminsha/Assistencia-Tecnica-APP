@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, ImageBackground, Image } from 'react-native';
 import Quadrado from '../components/quadrado';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Toolbar } from '../components/toolbar';
-import firebase from 'firebase';
 
 export interface AppProps {
   navigation: any;

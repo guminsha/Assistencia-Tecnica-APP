@@ -7,7 +7,6 @@ import LoginScreen from '../screens/login';
 import OSNavigation from './os-navigation';
 import ClienteNavigation from './cliente-navigation';
 import FuncionarioNavigation from './funcionario-navigation';
-import RegistrarPendenciaScreen from '../screens/pendencia-registro';
 import firebase from 'firebase';
 
 

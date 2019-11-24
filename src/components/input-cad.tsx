@@ -5,7 +5,8 @@ import { Input } from 'react-native-elements';
 //Define os valores de entrada do componente
 export interface AppProps {
     texto?:string;              //Uma label para o campo 
-    icone?:string;               //Nome do iconea  ser exibido
+    icone?:string;               //Nome do icone ser exibido
+    value?:string;               //Valor do campo
     placeholder?:string;         //Exibe um texto guia quando não tiver nada digitado
     onChangeText?(texto:string);//Retorna o texto modificado 
     isPassword?:boolean;        //Checa se um campo deve ou nõa ser exibido

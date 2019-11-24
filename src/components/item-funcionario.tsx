@@ -4,7 +4,7 @@ import Funcionario from '../models/funcionario-model';
 import Swipeout from 'react-native-swipeout';
 
 export interface AppProps {
-    funcionarios: Funcionario;
+    funcionario: Funcionario;
     onEditar(Funcionarios: Funcionario);
     onExcluir(id: string);
 }
@@ -12,13 +12,13 @@ export interface AppProps {
 export function ItemFuncionario(props: AppProps) {
     return (
         <Swipeout right={[
-            { text: 'Editar', backgroundColor: 'blue', color: 'white', onPress: () => props.onEditar(props.funcionarios) },
-            { text: 'Remover', backgroundColor: "red", color: 'white', onPress: () => props.onExcluir(props.funcionarios.id) }
+            { text: 'Editar', backgroundColor: 'blue', color: 'white', onPress: () => props.onEditar(props.funcionario) },
+            { text: 'Remover', backgroundColor: "red", color: 'white', onPress: () => props.onExcluir(props.funcionario.id) }
         ]}>
             <TouchableOpacity onPress={() => console.log('Informações do Funcionario')}>
                 <View style={styles.container}>
-                    <Text style={styles.legendaTexto}>{props.funcionarios.nome}</Text>
-                    <Text style={styles.legendaTexto}>{props.funcionarios.telefone}</Text>
+                    <Text style={styles.legendaTexto}>{props.funcionario.nome}</Text>
+                    <Text style={styles.legendaTexto}>{props.funcionario.telefone}</Text>
                 </View>
             </TouchableOpacity>
         </Swipeout>

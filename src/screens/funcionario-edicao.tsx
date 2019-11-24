@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet, Text, ImageBackground, KeyboardAvoidingView, Platform, ToastAndroid } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Input } from 'react-native-elements';
 import InputCad from '../components/input-cad';
 import QuadradoCad from '../components/quadrado-cad';
 import { Toolbar } from '../components/toolbar';
@@ -17,7 +17,7 @@ export interface AppState {
   funcionario:Funcionario;
 }
 
-export default class CadastrarFuncionarioScreen extends React.Component<AppProps, AppState> {
+export default class EditarFuncionarioScreen extends React.Component<AppProps, AppState> {
   private funcionariosProvider = new FuncionariosProvider();
   
   constructor(props: AppProps) {
@@ -27,9 +27,9 @@ export default class CadastrarFuncionarioScreen extends React.Component<AppProps
     };
   }
 
-  public cadastrar() {
+  public editar() {
     let {funcionario} = this.state;
-    this.funcionariosProvider.cadastrar(funcionario)
+    this.funcionariosProvider.editar(funcionario)
     this.props.navigation.goBack();
   }
 
@@ -39,14 +39,14 @@ export default class CadastrarFuncionarioScreen extends React.Component<AppProps
       <Toolbar titulo="Novo Funcionário" navigation={this.props.navigation} menu />
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <QuadradoCad>
-          <InputCad placeholder="Nome" onChangeText={(nome) => this.setState({ funcionario: { ...this.state.funcionario, nome } })} />
-          <InputCad placeholder="CPF" onChangeText={(cpf) => this.setState({ funcionario: { ...this.state.funcionario, cpf } })} />
-          <InputCad placeholder="Telefone" onChangeText={(telefone) => this.setState({ funcionario: { ...this.state.funcionario, telefone } })} />
-          <InputCad placeholder="Endereço" onChangeText={(endereco) => this.setState({ funcionario: { ...this.state.funcionario, endereco } })} />
-          <InputCad placeholder="E-mail" onChangeText={(email) => this.setState({ funcionario: { ...this.state.funcionario, email } })} />
-          <InputCad placeholder="Senha" onChangeText={(senha) => this.setState({ funcionario: { ...this.state.funcionario, senha } })} isPassword />
+          <InputCad placeholder="Nome" value={this.state.funcionario.nome} onChangeText={(nome) => this.setState({ funcionario: { ...this.state.funcionario, nome } })} />
+          <InputCad placeholder="CPF" value={this.state.funcionario.cpf} onChangeText={(cpf) => this.setState({ funcionario: { ...this.state.funcionario, cpf } })} />
+          <InputCad placeholder="Telefone" value={this.state.funcionario.telefone} onChangeText={(telefone) => this.setState({ funcionario: { ...this.state.funcionario, telefone } })} />
+          <InputCad placeholder="Endereço" value={this.state.funcionario.endereco} onChangeText={(endereco) => this.setState({ funcionario: { ...this.state.funcionario, endereco } })} />
+          <InputCad placeholder="E-mail" value={this.state.funcionario.email} onChangeText={(email) => this.setState({ funcionario: { ...this.state.funcionario, email } })} />
+          <InputCad placeholder="Senha" value={this.state.funcionario.senha} onChangeText={(senha) => this.setState({ funcionario: { ...this.state.funcionario, senha } })} isPassword />
           <View style={{ alignItems: 'flex-end' }}>
-            <Button title="Cadastrar" onPress={this.cadastrar.bind(this)} icon={{ name: 'send', color: 'white' }} buttonStyle={{ borderRadius: 20, width: 150, marginTop: 15, marginBottom: 10 }} />
+            <Button title="Cadastrar" onPress={this.editar.bind(this)} icon={{ name: 'send', color: 'white' }} buttonStyle={{ borderRadius: 20, width: 150, marginTop: 15, marginBottom: 10 }} />
           </View>
         </QuadradoCad>
       </KeyboardAvoidingView>

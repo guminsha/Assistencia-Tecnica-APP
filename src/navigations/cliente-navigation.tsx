@@ -1,27 +1,20 @@
-import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import ListarClienteScreen from '../screens/cliente';
 import CadastrarClienteScreen from '../screens/cliente-cadastro';
-import { Icon } from 'react-native-elements';
+import EditarClienteScreen from '../screens/cliente-edicao';
 
 
-export default createBottomTabNavigator({
+export default createStackNavigator({
     clienteList: {
         screen: ListarClienteScreen,
-        navigationOptions: {
-            title: 'Listar Clientes',
-            tabBarIcon: ({ tintColor }) => (
-                <Icon name="people" color={tintColor} size={24} />
-            )
-        }
+        navigationOptions: { header: null}
     },
     clienteCad: {
         screen: CadastrarClienteScreen,
-        navigationOptions: {
-            title: 'Cadastrar Clientes',
-            tabBarIcon: ({ tintColor }) => (
-                <Icon name="person-add" color={tintColor} size={24} />
-            ),
-        }
+        navigationOptions: { header: null}
+    },
+    clienteEdit: {
+        screen: EditarClienteScreen,
+        navigationOptions: { header: null}
     }
 })

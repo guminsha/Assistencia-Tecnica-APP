@@ -22,7 +22,7 @@ export class OrdensProvider {
      */
     cadastrar(ordem: Ordem) {
         let doc = this.db.doc();
-        ordem.id = this.userID;
+        ordem.funcionarioID = this.userID;
         ordem.id = doc.id;
         doc.set(ordem);
     }
@@ -47,7 +47,7 @@ export class OrdensProvider {
      * Busca todas Ordens de Serviço de um usuário
      */
     async buscarTodos(): Promise<Ordem[]> {
-        let resultado = await this.db.where('usuarioID', '==', this.userID).get();
+        let resultado = await this.db.where('funcionarioID', '==', this.userID).get();
         let ordens = [];
         resultado.forEach(ordem => {
             ordens.push(ordem.data())

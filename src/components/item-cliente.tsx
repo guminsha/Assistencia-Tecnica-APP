@@ -4,21 +4,21 @@ import Cliente from '../models/cliente-model';
 import Swipeout from 'react-native-swipeout';
 
 export interface AppProps {
-    clientes: Cliente;
-    onEditar(clientes: Cliente);
+    cliente:Cliente;
+    onEditar(cliente:Cliente);
     onExcluir(id: string);
 }
 
 export function ItemCliente(props: AppProps) {
     return (
         <Swipeout right={[
-            { text: 'Editar', backgroundColor: 'blue', color: 'white', onPress: () => props.onEditar(props.clientes) },
-            { text: 'Remover', backgroundColor: "red", color: 'white', onPress: () => props.onExcluir(props.clientes.id) }
+            { text: 'Editar', backgroundColor: 'blue', color: 'white', onPress: () => props.onEditar(props.cliente) },
+            { text: 'Remover', backgroundColor: "red", color: 'white', onPress: () => props.onExcluir(props.cliente.id) }
         ]}>
             <TouchableOpacity onPress={() => console.log('Informações do Cliente')}>
                 <View style={styles.container}>
-                    <Text style={styles.legendaTexto}>{props.clientes.nome}</Text>
-                    <Text style={styles.legendaTexto}>{props.clientes.telefone}</Text>
+                    <Text style={styles.legendaTexto}>{props.cliente.nome}</Text>
+                    <Text style={styles.legendaTexto}>{props.cliente.telefone}</Text>
                 </View>
             </TouchableOpacity>
         </Swipeout>

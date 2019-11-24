@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, ImageBackground, Image } from 'react-native';
+import { View, StyleSheet, Text, ImageBackground, Alert } from 'react-native';
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import { Toolbar } from '../components/toolbar';
 import { ItemFuncionario } from '../components/item-funcionario';
 import Funcionario from '../models/funcionario-model';
+import { FuncionariosProvider } from '../providers/funcionario-provider';
+import { Fab } from '../components/fab';
 
 export interface AppProps {
   navigation: any;
+  funcionarios: Funcionario[];
+  onExcluir(id: string);
 }
 
 export interface AppState {
@@ -14,31 +18,43 @@ export interface AppState {
 }
 
 export default class ListarFuncionarioScreen extends React.Component<AppProps, AppState> {
+
+  private funcionariosProvider = new FuncionariosProvider();
+
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      funcionarios: [new Funcionario('Hudson Aston', '81 9 9999-9999', '1'),
-      new Funcionario('Tameka Daniell', '81 9 4122-4224', '2'),
-      new Funcionario('Emelia Ware', '81 9 4122-4224', '3'),
-      new Funcionario('Dorothy Huxtable', '82 9 9922-9222', '4'),
-      new Funcionario('Athena Mathewson', '82 9 9922-9222', '5'),
-      new Funcionario('Corbin Bloodworth', '82 9 8888-8888', '6'),
-      new Funcionario('Serena Bonner', '82 9 8328-3388', '7'),
-      new Funcionario('Merton Hopkins', '82 9 8238-8888', '8'),
-      new Funcionario('Rúben Pryor', '81 9 4122-4224', '9'),
-      new Funcionario('Alexandre Hedley', '81 9 4122-4224', '10'),
-      new Funcionario('Candida Benjaminson', '81 9 4122-4224', '11'),
-      new Funcionario('Corinne Hooper', '82 9 8888-8888', '12'),
-      new Funcionario('Coy Tipton', '82 9 9922-9222', '13'),
-      new Funcionario('Chad Rose', '81 9 4122-4224', '14'),
-      new Funcionario('Clare Shaw', '82 9 9688-1258', '15'),
-      new Funcionario('Dores Simões', '81 9 4122-4224', '16'),
-      new Funcionario('Telmo Magalhães', '81 9 4122-4224', '17'),
-      new Funcionario('Marcela Lucas', '82 9 9922-9222', '18'),
-      new Funcionario('Eulália Romão', '81 94122-4224', '19'),
-      new Funcionario('Noémia Palmeiro', '82 9 8888-8888', '20'),
-      ]
+      funcionarios: this.props.funcionarios
     };
+    console.disableYellowBox = true;
+  }
+
+  /** Função chamada assim que a página é criadda pela primeira vez */
+  async componentDidMount() {
+    //Listener para listar as funcionarios
+    this.props.navigation.addListener('didFocus', () => {
+      this.funcionariosProvider.buscarTodos().then(funcionarios => {
+        this.setState({ funcionarios })
+      })
+    })
+  }
+
+  /**
+   * Função que Exclui um item da lista
+   * @param id 
+   */
+  public excluir(id) {
+    Alert.alert('Excluir OS', 'Deseja realmente excluir essa OS?', [
+      {text:'Sim', onPress:() => {
+        
+        this.funcionariosProvider.excluir(id);
+        this.funcionariosProvider.buscarTodos().then(funcionarios => {
+          this.setState({funcionarios})
+        })
+      
+      }},
+      {text: 'Não'}
+    ]);
   }
 
   public render() {
@@ -46,21 +62,22 @@ export default class ListarFuncionarioScreen extends React.Component<AppProps, A
       <Toolbar titulo="Funcionários" navigation={this.props.navigation} menu />
       <View style={styles.container}>
         <View style={styles.legenda}>
-        <Text style={styles.legendaTexto}>Funcionario</Text>
-        <Text style={styles.legendaTexto}>Telefone</Text>
+          <Text style={styles.legendaTexto}>Funcionario</Text>
+          <Text style={styles.legendaTexto}>Telefone</Text>
         </View>
         <ScrollView>
           <FlatList
             data={this.state.funcionarios}
             extraData={this.state.funcionarios}
             keyExtractor={(t) => t.id}
-            renderItem={({ item }) => (<ItemFuncionario funcionarios={item}
-              onEditar={(Funcionario) => this.props.navigation.navigate('funcionarioEdicao', { Funcionario })}
-              onExcluir={(id) => console.log(id)} />
+            renderItem={({ item }) => (<ItemFuncionario funcionario={item}
+              onEditar={(Funcionario) => this.props.navigation.navigate('funcEdit', { Funcionario })}
+              onExcluir={this.excluir.bind(this)} />
             )}
           />
         </ScrollView>
       </View>
+      <Fab onPress={() => this.props.navigation.navigate('funcCad')}/>  
     </ImageBackground>);
   }
 }
