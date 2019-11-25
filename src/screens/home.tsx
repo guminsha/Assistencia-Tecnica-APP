@@ -3,6 +3,9 @@ import { View, StyleSheet, Text, ImageBackground, Image } from 'react-native';
 import Quadrado from '../components/quadrado';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Toolbar } from '../components/toolbar';
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
+import firebase from 'firebase';
 
 export interface AppProps {
   navigation: any;
@@ -16,6 +19,20 @@ export default class HomeScreen extends React.Component<AppProps, AppState> {
     super(props);
     this.state = {
     };
+  }
+
+  async componentDidMount() {
+    //salva o token para notificação de um WebService com o EXPO
+    let permissao = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    if (permissao.status == 'granted') {
+      let token = await Notifications.getExpoPushTokenAsync()
+      console.log(token);
+
+      firebase.firestore()
+          .collection('funcionarios')
+          .doc(firebase.auth().currentUser.uid)
+          .set({'devideID': token })
+    }
   }
 
   public render() {

@@ -23,6 +23,7 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
       email: '',
       senha: '',
     };
+    console.disableYellowBox = true;
   }
 
   public logar() {
@@ -56,9 +57,9 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
         </Quadrado>
       </KeyboardAvoidingView>
       <AdMobBanner
-        bannerSize="fullBanner"
-        adUnitID="ca-app-pub-8890411738087560/1818681309" // ca-app-pub-5947557768603908/1717920906  Meu id
-        testDeviceID="EMULATOR"                           // ca-app-pub-8890411738087560/1818681309  id do professor
+        bannerSize="fullBanner"                           // ca-app-pub-5947557768603908~4502676977  id do meu app
+        adUnitID="ca-app-pub-8890411738087560/1818681309" // ca-app-pub-5947557768603908/1717920906  id da minha propaganda
+        testDeviceID="EMULATOR"                           // ca-app-pub-8890411738087560/1818681309  id da propaganda do professor
       />
     </ImageBackground>);
   }

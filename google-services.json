@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "189233719113",
+    "firebase_url": "https://assistencia-tecnica-607a6.firebaseio.com",
+    "project_id": "assistencia-tecnica-607a6",
+    "storage_bucket": "assistencia-tecnica-607a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189233719113:android:4002856b35712debe1dc98",
+        "android_client_info": {
+          "package_name": "br.com.rougertbrian.reactnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189233719113-n4rt1klqnm8r769hnhs2sthr5cv7idg7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSr1kpOmWkJNc849_v48xdgLqAm9cvz84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189233719113-n4rt1klqnm8r769hnhs2sthr5cv7idg7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

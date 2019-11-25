@@ -41,7 +41,6 @@ export default class EditarFuncionarioScreen extends React.Component<AppProps, A
   }
 
   public render() {
-    console.log(this.state.funcionario)
     return (<ImageBackground source={require('./../../assets/imgs/background3.jpg')}
       style={styles.background}>
       <Toolbar titulo="Novo Funcionário" navigation={this.props.navigation} menu />

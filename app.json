@@ -9,6 +9,11 @@
       "android",
       "web"
     ],
+    "android": {
+      "package": "br.com.rougertbrian.reactnative",
+      "versionCode": 1,
+      "googleServicesFile": "./google-services.json"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -46,7 +46,7 @@ export default class CadastrarOSScreen extends React.Component<AppProps, AppStat
           <InputCad placeholder="Modelo" onChangeText={(modelo) => this.setState({ ordem: {...this.state.ordem, modelo} })} />
           <InputCad placeholder="Sintomas" onChangeText={(sintomas) => this.setState({ ordem: {...this.state.ordem, sintomas} })} />
           <InputCad placeholder="Observações" onChangeText={(observacoes) => this.setState({ ordem: {...this.state.ordem, observacoes} })} />
-          <InputCad placeholder="Data" onChangeText={(data) => this.setState({ ordem: {...this.state.ordem, data} })} />
+          <InputCad placeholder="Data de Entrada" onChangeText={(data) => this.setState({ ordem: {...this.state.ordem, data} })} />
           <InputCad placeholder="Status" onChangeText={(status) => this.setState({ ordem: {...this.state.ordem, status} })} />
           <View style={{ alignItems: 'flex-end' }}>
             <Button title="Cadastrar" onPress={this.cadastrar.bind(this)} icon={{ name: 'send', color: 'white' }} buttonStyle={{ borderRadius: 20, width: 150, marginTop: 15, marginBottom: 10 }} />

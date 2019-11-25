@@ -34,7 +34,6 @@ export default class EditarClienteScreen extends React.Component<AppProps, AppSt
   }
 
   public render() {
-    console.log(this.state.cliente);
     return (<ImageBackground source={require('./../../assets/imgs/background3.jpg')}
       style={styles.background}>
       <Toolbar titulo="Editar Cliente" navigation={this.props.navigation} menu />
