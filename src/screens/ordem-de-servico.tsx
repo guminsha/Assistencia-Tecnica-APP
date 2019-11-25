@@ -71,7 +71,7 @@ export default class ListarOSScreen extends React.Component<AppProps, AppState> 
             data={this.state.ordens}
             extraData={this.state.ordens}
             keyExtractor={(t) => t.id}
-            renderItem={({ item }) => (<ItemOS ordem={item}
+            renderItem={({ item }) => (<ItemOS ordem={item} onPress={() => this.props.navigation.navigate('osDetal', {ordem: item})}
               onEditar={(ordem) => this.props.navigation.navigate('osEdit', { ordem })}
               onExcluir={this.excluir.bind(this)} />
             )}

@@ -71,7 +71,7 @@ export default class ListarFuncionarioScreen extends React.Component<AppProps, A
             data={this.state.funcionarios}
             extraData={this.state.funcionarios}
             keyExtractor={(t) => t.id}
-            renderItem={({ item }) => (<ItemFuncionario funcionario={item}
+            renderItem={({ item }) => (<ItemFuncionario funcionario={item} onPress={() => this.props.navigation.navigate('funcDetal', {funcionario: item})}
               onEditar={(funcionario) => this.props.navigation.navigate('funcEdit', { funcionario })}
               onExcluir={this.excluir.bind(this)} />
             )}

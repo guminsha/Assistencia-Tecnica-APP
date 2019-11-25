@@ -7,6 +7,7 @@ export interface AppProps {
     cliente:Cliente;
     onEditar(cliente:Cliente);
     onExcluir(id: string);
+    onPress?: any;
 }
 
 export function ItemCliente(props: AppProps) {
@@ -15,7 +16,7 @@ export function ItemCliente(props: AppProps) {
             { text: 'Editar', backgroundColor: 'blue', color: 'white', onPress: () => props.onEditar(props.cliente) },
             { text: 'Remover', backgroundColor: "red", color: 'white', onPress: () => props.onExcluir(props.cliente.id) }
         ]}>
-            <TouchableOpacity onPress={() => console.log('Informações do Cliente')}>
+            <TouchableOpacity onPress={props.onPress}>
                 <View style={styles.container}>
                     <Text style={styles.legendaTexto}>{props.cliente.nome}</Text>
                     <Text style={styles.legendaTexto}>{props.cliente.telefone}</Text>

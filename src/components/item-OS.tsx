@@ -7,6 +7,7 @@ export interface AppProps {
     ordem:Ordem;
     onEditar(ordem:Ordem);
     onExcluir(id: string);
+    onPress?: any;
 }
 
 export function ItemOS(props: AppProps) {
@@ -15,7 +16,7 @@ export function ItemOS(props: AppProps) {
             { text: 'Editar', backgroundColor: 'blue', color: 'white', onPress: () => props.onEditar(props.ordem) },
             { text: 'Remover', backgroundColor: "red", color: 'white', onPress: () => props.onExcluir(props.ordem.id) }
         ]}>
-            <TouchableOpacity onPress={() => console.log('Informações da OS')}>
+            <TouchableOpacity onPress={props.onPress}>
                 <View style={styles.container}>
                     <Text style={styles.legendaTexto}>OS Nº{props.ordem.numero}</Text>
                     <Text style={styles.legendaTexto}>{props.ordem.cliente}</Text>

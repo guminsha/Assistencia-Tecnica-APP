@@ -5,6 +5,7 @@ import QuadradoCad from '../components/quadrado-cad';
 import { Toolbar } from '../components/toolbar';
 import Cliente from '../models/cliente-model';
 import { ClientesProvider } from '../providers/cliente-provider';
+import InputCad from '../components/input-cad';
 
 export interface AppProps {
   navigation: any;
@@ -39,11 +40,11 @@ export default class EditarClienteScreen extends React.Component<AppProps, AppSt
       <Toolbar titulo="Editar Cliente" navigation={this.props.navigation} menu />
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <QuadradoCad>
-          <Input placeholder="Nome" value={this.state.cliente.nome} onChangeText={(nome) => this.setState({ cliente: {...this.state.cliente, nome} })} />
-          <Input placeholder="CPF" value={this.state.cliente.cpf} onChangeText={(cpf) => this.setState({ cliente: {...this.state.cliente, cpf} })} />
-          <Input placeholder="Telefone" value={this.state.cliente.telefone} onChangeText={(telefone) => this.setState({ cliente: {...this.state.cliente, telefone} })} />
-          <Input placeholder="E-mail" value={this.state.cliente.email} onChangeText={(email) => this.setState({ cliente: {...this.state.cliente, email} })} />
-          <Input placeholder="Endereço" value={this.state.cliente.endereco} onChangeText={(endereco) => this.setState({ cliente: {...this.state.cliente, endereco} })} />
+          <InputCad placeholder="Nome" value={this.state.cliente.nome} onChangeText={(nome) => this.setState({ cliente: {...this.state.cliente, nome} })} />
+          <InputCad placeholder="CPF" value={this.state.cliente.cpf} onChangeText={(cpf) => this.setState({ cliente: {...this.state.cliente, cpf} })} />
+          <InputCad placeholder="Telefone" value={this.state.cliente.telefone} onChangeText={(telefone) => this.setState({ cliente: {...this.state.cliente, telefone} })} />
+          <InputCad placeholder="E-mail" value={this.state.cliente.email} onChangeText={(email) => this.setState({ cliente: {...this.state.cliente, email} })} />
+          <InputCad placeholder="Endereço" value={this.state.cliente.endereco} onChangeText={(endereco) => this.setState({ cliente: {...this.state.cliente, endereco} })} />
           <View style={{ alignItems: 'flex-end' }}>
             <Button title="Atualizar" onPress={this.editar.bind(this)} icon={{ name: 'send', color: 'white' }} buttonStyle={{ borderRadius: 20, width: 150, marginTop: 15, marginBottom: 10 }} />
           </View>

@@ -5,6 +5,7 @@ import QuadradoCad from '../components/quadrado-cad';
 import { Toolbar } from '../components/toolbar';
 import Ordem from '../models/OS-model';
 import { OrdensProvider } from '../providers/ordem-provider';
+import InputCad from '../components/input-cad';
 
 export interface AppProps {
   navigation: any;
@@ -38,15 +39,15 @@ export default class EditarOSScreen extends React.Component<AppProps, AppState> 
       <Toolbar titulo="Editar OS" navigation={this.props.navigation} menu />
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <QuadradoCad>
-          <Input placeholder="Nº OS" value={this.state.ordem.numero} onChangeText={(numero) => this.setState({ ordem: {...this.state.ordem, numero} })} />
-          <Input placeholder="Cliente" value={this.state.ordem.cliente} onChangeText={(cliente) => this.setState({ ordem: {...this.state.ordem, cliente} })} />
-          <Input placeholder="Aparelho" value={this.state.ordem.aparelho} onChangeText={(aparelho) => this.setState({ ordem: {...this.state.ordem, aparelho} })} />
-          <Input placeholder="Marca" value={this.state.ordem.marca} onChangeText={(marca) => this.setState({ ordem: {...this.state.ordem, marca} })} />
-          <Input placeholder="Modelo" value={this.state.ordem.modelo} onChangeText={(modelo) => this.setState({ ordem: {...this.state.ordem, modelo} })} />
-          <Input placeholder="Sintomas" value={this.state.ordem.sintomas} onChangeText={(sintomas) => this.setState({ ordem: {...this.state.ordem, sintomas} })} />
-          <Input placeholder="Observações" value={this.state.ordem.observacoes} onChangeText={(observacoes) => this.setState({ ordem: {...this.state.ordem, observacoes} })} />
-          <Input placeholder="Data" value={this.state.ordem.data} onChangeText={(data) => this.setState({ ordem: {...this.state.ordem, data} })} />
-          <Input placeholder="Status" value={this.state.ordem.status} onChangeText={(status) => this.setState({ ordem: {...this.state.ordem, status} })} />
+          <InputCad placeholder="Nº OS" value={this.state.ordem.numero} onChangeText={(numero) => this.setState({ ordem: {...this.state.ordem, numero} })} />
+          <InputCad placeholder="Cliente" value={this.state.ordem.cliente} onChangeText={(cliente) => this.setState({ ordem: {...this.state.ordem, cliente} })} />
+          <InputCad placeholder="Aparelho" value={this.state.ordem.aparelho} onChangeText={(aparelho) => this.setState({ ordem: {...this.state.ordem, aparelho} })} />
+          <InputCad placeholder="Marca" value={this.state.ordem.marca} onChangeText={(marca) => this.setState({ ordem: {...this.state.ordem, marca} })} />
+          <InputCad placeholder="Modelo" value={this.state.ordem.modelo} onChangeText={(modelo) => this.setState({ ordem: {...this.state.ordem, modelo} })} />
+          <InputCad placeholder="Sintomas" value={this.state.ordem.sintomas} onChangeText={(sintomas) => this.setState({ ordem: {...this.state.ordem, sintomas} })} />
+          <InputCad placeholder="Observações" value={this.state.ordem.observacoes} onChangeText={(observacoes) => this.setState({ ordem: {...this.state.ordem, observacoes} })} />
+          <InputCad placeholder="Data" value={this.state.ordem.data} onChangeText={(data) => this.setState({ ordem: {...this.state.ordem, data} })} />
+          <InputCad placeholder="Status" value={this.state.ordem.status} onChangeText={(status) => this.setState({ ordem: {...this.state.ordem, status} })} />
           <View style={{ alignItems: 'flex-end' }}>
             <Button title="Atualizar" onPress={this.editar.bind(this)} icon={{ name: 'send', color: 'white' }} buttonStyle={{ borderRadius: 20, width: 150, marginTop: 15, marginBottom: 10 }} />
           </View>

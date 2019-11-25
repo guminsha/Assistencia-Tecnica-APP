@@ -26,7 +26,8 @@ export default (props: AppProps) => (
             inputContainerStyle={styles.containerInput}
             onChangeText={(texto) => props.onChangeText(texto)}
             inputStyle={{color:'white'}} 
-            autoCapitalize = {'none'} />
+            autoCapitalize = {'none'} 
+            value = {props.value}/>
     </View>
 )
 

@@ -72,7 +72,7 @@ export default class ListarClienteScreen extends React.Component<AppProps, AppSt
             data={this.state.clientes}
             extraData={this.state.clientes}
             keyExtractor={(t) => t.id}
-            renderItem={({ item }) => (<ItemCliente cliente={item}
+            renderItem={({ item }) => (<ItemCliente cliente={item} onPress={() => this.props.navigation.navigate('clienteDetal', {cliente: item})}
               onEditar={(cliente) => this.props.navigation.navigate('clienteEdit', { cliente })}
               onExcluir={this.excluir.bind(this)} />
             )}

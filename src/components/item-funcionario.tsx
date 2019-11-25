@@ -7,6 +7,7 @@ export interface AppProps {
     funcionario:Funcionario;
     onEditar(funcionario:Funcionario);
     onExcluir(id: string);
+    onPress?: any;
 }
 
 export function ItemFuncionario(props: AppProps) {
@@ -15,7 +16,7 @@ export function ItemFuncionario(props: AppProps) {
             { text: 'Editar', backgroundColor: 'blue', color: 'white', onPress: () => props.onEditar(props.funcionario) },
             { text: 'Remover', backgroundColor: "red", color: 'white', onPress: () => props.onExcluir(props.funcionario.id) }
         ]}>
-            <TouchableOpacity onPress={() => console.log('Informações do Funcionario')}>
+            <TouchableOpacity onPress={props.onPress}>
                 <View style={styles.container}>
                     <Text style={styles.legendaTexto}>{props.funcionario.nome}</Text>
                     <Text style={styles.legendaTexto}>{props.funcionario.telefone}</Text>

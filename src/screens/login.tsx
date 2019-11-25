@@ -4,6 +4,8 @@ import { Button } from 'react-native-elements';
 import InputRound from '../components/input-round';
 import Quadrado from '../components/quadrado';
 import firebase from 'firebase';
+import { AdMobBanner, } from 'expo-ads-admob';
+
 
 export interface AppProps {
   navigation: any;
@@ -53,6 +55,11 @@ export default class LoginScreen extends React.Component<AppProps, AppState> {
           </View>
         </Quadrado>
       </KeyboardAvoidingView>
+      <AdMobBanner
+        bannerSize="fullBanner"
+        adUnitID="ca-app-pub-8890411738087560/1818681309" // ca-app-pub-5947557768603908/1717920906  Meu id
+        testDeviceID="EMULATOR"                           // ca-app-pub-8890411738087560/1818681309  id do professor
+      />
     </ImageBackground>);
   }
 }
